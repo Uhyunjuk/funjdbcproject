@@ -7,15 +7,75 @@ import com.kh.jdbc.day01.studen.model.vo.Student;
 
 public class StudentController {
 
+	/**
+	 * 전체조회
+	 * 
+	 * @return List<Student>
+	 */
 	public List<Student> printAll() {
 		StudentDAO sDao = new StudentDAO();
 		List<Student> sList = sDao.selectAll();
 		return sList;
 	}
 
+	/**
+	 * 학생 아이디로 조회
+	 * 
+	 * @param studentId
+	 * @return Student
+	 */
+	public Student printOneById(String studentId) {
+		StudentDAO sDao = new StudentDAO();
+		Student student = sDao.selectOneById(studentId);
+		return student;
+	}
+	
+	/**
+	 * 학생 이름으로 조회
+	 * 
+	 * @param studentName
+	 * @return List<Student>
+	 */
+	public List<Student> printAllByName(String studentName) {
+		StudentDAO sDao = new StudentDAO();
+		List<Student> sList = sDao.selectAllByName(studentName);
+		return sList;
+	}
+
+
+
+	/**
+	 * 학생 등록
+	 * 
+	 * @param student
+	 * @return int
+	 */
 	public int registerStudent(Student student) {
 		StudentDAO sDao = new StudentDAO();
-		int result = sDao.insertMemeber(student);
+		int result = sDao.insertMember(student);
 		return result;
 	}
+
+	/**
+	 * 학생 삭제
+	 * @param studentId
+	 * @return
+	 */
+	public int removeStudent(String studentId) {
+		StudentDAO sDao = new StudentDAO();
+		int result = sDao.deleteMember(studentId);
+		return result;
+	}
+	
+/**
+ * 학생 수정
+ * @param student
+ * @return
+ */
+	public int modifyStudent(Student student) {
+		StudentDAO sDao = new StudentDAO();
+		int result = sDao.updateStudent(student);
+		return result;
+	}
+
 }
