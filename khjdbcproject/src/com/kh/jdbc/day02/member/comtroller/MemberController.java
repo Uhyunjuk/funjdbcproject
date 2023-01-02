@@ -12,7 +12,7 @@ public class MemberController {
 	 * 
 	 * @return List<Member>
 	 */
-	public List<Member> printAll() {
+	public List<Member> printAll() { // SELECT * FROM MEMBER_TBL
 		MemberDAO mDao = new MemberDAO();
 		List<Member> mList = mDao.selectAll();
 		return mList;
@@ -23,11 +23,14 @@ public class MemberController {
 	 * @param studentId
 	 * @return Member
 	 */
-	public Member printOneBtId(String studentId) {
+	public Member printOneById(String memberId) {
+		//ResultSet이 1개면 Member
+		//ResultSet이 1개 이상이면 List<Memeber>
 		MemberDAO mDao = new MemberDAO();
-		Member member = mDao.selectOneById(studentId);
+		Member member = mDao.selectOneById(memberId);
 		return member;
 	}
+	
 	
 	/**
 	 * 회원 이름으로 조회
@@ -74,7 +77,7 @@ public class MemberController {
 	}
 	
 	/**
-	 * 로그인 하기 
+	 * 회원 로그인하기
 	 * @param member
 	 * @return
 	 */

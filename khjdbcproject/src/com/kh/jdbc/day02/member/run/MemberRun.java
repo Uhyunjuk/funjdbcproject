@@ -33,18 +33,18 @@ public class MemberRun {
 			case 2:
 				// 아이디로 조회
 				memberId = mView.inputMemberId("검색 ");
-				member = mCon.printOneBtId(memberId);
+				member = mCon.printOneById(memberId);
 				if (member != null) {
 					mView.showOne(member);
 				} else {
-					mView.displayError("일치하는 데이터가 없습니다.");
+					mView.displayError("일치하는 회원이 없습니다.");
 				}
 				break;
 			case 3:
 				// 이름으로 조회
 				memberName = mView.inputMemberName("검색");
 				mList = mCon.printAllbyName(memberName);
-				if (!mList.isEmpty()) {
+				if (mList.size() > 0) {
 					mView.showAll(mList);
 				} else {
 					mView.displayError("일치하는 데이터가 없습니다.");
@@ -62,12 +62,20 @@ public class MemberRun {
 				break;
 			case 5:
 				// 회원 정보수정
+				// 아이디를 입력받고
 				memberId = mView.inputMemberId("수정");
-				member = mCon.printOneBtId(memberId);
+				// 데이터가 존재하면
+				member = mCon.printOneById(memberId);
 				if (member != null) {
-					member = mView.modifyMember(member);
-					mCon.modifyMember(member);
-					mView.displaySuccess("회원정보 수정 완료 >< !");
+					// 수정할 데이터 입력 받기
+					member = mView.modifyMember(memberId);
+					// 입력받은 데이터로 수정하기
+					result = mCon.modifyMember(member);
+					if (result > 0) {
+						mView.displaySuccess("회원정보 수정 완료 >< !");
+					} else {
+						mView.displayError("수정이 되지 않았습니다");
+					}
 				} else {
 					mView.displayError("일치하는 회원이 없습니다.");
 				}
@@ -76,19 +84,19 @@ public class MemberRun {
 				// 회원탈퇴
 				memberId = mView.inputMemberId("삭제");
 				result = mCon.removeMember(memberId);
-				if(result > 0) {
+				if (result > 0) {
 					mView.displaySuccess("탈퇴 완료 !");
-				}else {
+				} else {
 					mView.displayError("탈퇴 실패");
 				}
 				break;
-			case 7: 
+			case 7:
 				// 로그인 기능
 				member = mView.inputLoginInfo();
 				result = mCon.checkInfo(member);
-				if(result > 0) {
+				if (result > 0) {
 					mView.displaySuccess("로그인 성공 ↖^^↗");
-				}else {
+				} else {
 					mView.displayError("일치하는 정보가 존재하지 않습니다.");
 				}
 				break;

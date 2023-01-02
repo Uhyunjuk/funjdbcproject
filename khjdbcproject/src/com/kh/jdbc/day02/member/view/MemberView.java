@@ -51,6 +51,7 @@ public class MemberView {
 	}
 
 	public void showOne(Member member) {
+		System.out.println("=== === "+member.getMemberId()+" 회원 조회 결과 === ===");
 		System.out.print("아이디 : " + member.getMemberId());
 		System.out.print(", 비밀번호 : " + member.getMemberPwd());
 		System.out.print(", 이름 : " + member.getMemberName());
@@ -72,9 +73,9 @@ public class MemberView {
 	}
 
 	// 이름으로 조회하기 -> 이름 입력받기
-	public String inputMemberName(String message) {
+	public String inputMemberName(String category) {
 		Scanner sc = new Scanner(System.in);
-		System.out.print(message + "할 이름 입력 : ");
+		System.out.print(category + "할 이름 입력 : ");
 		String memberName = sc.next();
 		return memberName;
 
@@ -110,28 +111,24 @@ public class MemberView {
 	}
 
 	// 회원정보수정
-	public Member modifyMember(Member member) {
+	public Member modifyMember(String memberId) {
+		
 		Scanner sc = new Scanner(System.in);
-		System.out.print("수정할 비밀번호 입력 : ");
-		String memberPwd = sc.next();
-		System.out.print("수정할 이메일 입력 : ");
-		String memberEmail = sc.next();
-		System.out.print("수정할 전화번호 입력 : ");
-		String memberPhone = sc.next();
-		System.out.print("수정할 주소 입력 : ");
+		Member member = new Member();
+		member.setMemberId(memberId);
+		System.out.print("수정할 비밀번호 입력: ");
+		member.setMemberPwd(sc.next());
+		System.out.print("수정할 이메일 입력: ");
+		member.setMemberEmail(sc.next());
+		System.out.print("수정할 전화번호 입력: ");
+		member.setMemberPhone(sc.next());
+		System.out.print("수정할 주소 입력: ");
 		sc.nextLine();
-		String memberAddress = sc.nextLine();
-		System.out.print("수정할 취미 입력 : ");
-		String memberHobby = sc.next();
-
-		member.setMemberPwd(memberPwd);
-		member.setMemberEmail(memberEmail);
-		member.setMemberPhone(memberPhone);
-		member.setMemberAddress(memberAddress);
-		member.setMemberHobby(memberHobby);
+		member.setMemberAddress(sc.nextLine());
+		System.out.print("수정할 취미 입력: ");
+		member.setMemberHobby(sc.next());
 
 		return member;
-
 	}
 	
 	// 로그인 기능
