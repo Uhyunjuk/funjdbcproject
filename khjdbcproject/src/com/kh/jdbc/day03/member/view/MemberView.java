@@ -16,7 +16,6 @@ public class MemberView {
 		System.out.println("4. 회원 가입");
 		System.out.println("5. 회원 정보 수정");
 		System.out.println("6. 회원 탈퇴");
-		System.out.println("7. 로그인");
 		System.out.println("0. 프로그램 종료");
 		System.out.print("메뉴 선택 : ");
 		int choice = sc.nextInt();
